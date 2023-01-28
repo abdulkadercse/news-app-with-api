@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:news_app_with_api/repository/auth_repo.dart';
 import 'package:news_app_with_api/screens/profile/change_password.dart';
+import 'package:news_app_with_api/screens/splash_screen/splash_screen.dart';
 
 import 'edit_profile.dart';
 import 'my_account.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -180,32 +184,44 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              const ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 20.0,
-                  child: Icon(
-                    Icons.login,
-                    color: Color(0xff0601B4),
+               GestureDetector(
+                 onTap: () async {
+                   final prefs = await SharedPreferences.getInstance();
+                   String? token = prefs.getString('token');
+                   var status = await AuthRepo().logOut(token ?? '');
+
+                   status ? prefs
+                       .setString('token', '')
+                       .then((value) => const SplashScreen().launch(context)) : EasyLoading.showError('Error');
+
+                 },
+                 child: const ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    radius: 20.0,
+                    child: Icon(
+                      Icons.login,
+                      color: Color(0xff0601B4),
+                    ),
                   ),
-                ),
-                title: Text(
-                  "Log out ",
-                  style: TextStyle(
-                      color: Color(0xff181D27), fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  "Further secure your account for safety",
-                  style: TextStyle(
-                    color: Color(0xff181D27),
-                    fontWeight: FontWeight.normal,
+                  title: Text(
+                    "Log out ",
+                    style: TextStyle(
+                        color: Color(0xff181D27), fontWeight: FontWeight.bold),
                   ),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.grey,
-                ),
+                  subtitle: Text(
+                    "Further secure your account for safety",
+                    style: TextStyle(
+                      color: Color(0xff181D27),
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.grey,
+                  ),
               ),
+               ),
               const ListTile(
                 title: Text(
                   "More ",

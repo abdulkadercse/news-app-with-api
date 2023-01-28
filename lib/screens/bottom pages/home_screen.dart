@@ -5,6 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../Provider/news_provider.dart';
 import '../../Widget/news_card_widgets.dart';
 import '../../models/News_model.dart';
+import '../Search Screen/search_screen.dart';
 import '../details/news_details.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,13 +21,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Icon(Icons.search),
+        actions:  [
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
+              );
+            },
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: const Icon(Icons.search),
+              ),
+            ),
           )
         ],
         centerTitle: true,),
+
+
 
       drawer: Drawer(
         child: ListView(

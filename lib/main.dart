@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.indigo,
       ),
-      home: const BottomNav(),
+      home: const SplashScreen(),
       builder: EasyLoading.init(),
     );
   }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_with_api/screens/bottom%20navigration/bottom_navigation.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../authentication/sign_in.dart';
-import '../bottom pages/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,36 +13,38 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  Future<void> goHomeScreen()async{
+  Future<void> goHomeScreen() async {
     final prefs = await SharedPreferences.getInstance();
-     String? token =   prefs.getString("token");
-    Future.delayed(const Duration(seconds: 2)).then((value) {
+    var token = prefs.getString('token');
 
-      if(token.isEmptyOrNull){
-        const HomeScreen().launch(context);
-      }else{
-        const SignIn().launch(context);
-      }
-
-    });
+    if (token.isEmptyOrNull) {
+      await Future.delayed(const Duration(seconds: 2))
+          .then((value) => const SignIn().launch(context, isNewTask: true));
+    } else {
+      await Future.delayed(const Duration(seconds: 2))
+          .then((value) => const BottomNav().launch(context, isNewTask: true));
+    }
   }
+
+  @override
+  void initState() {
+    goHomeScreen();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.blueAccent,
       body: Center(
         child: CircleAvatar(
           backgroundColor: Color(0xffF49D1A),
-          radius: 00.0,
+          radius: 80.0,
           child: Text(
             "News App",
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
           ),
-
         ),
       ),
     );

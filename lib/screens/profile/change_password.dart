@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:news_app_with_api/screens/bottom%20navigration/bottom_navigation.dart';
+
+import '../../repository/auth_repo.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -67,7 +71,21 @@ class _ChangePasswordState extends State<ChangePassword> {
 
 
             // sign in button
-            ElevatedButton(onPressed: (){
+            ElevatedButton(onPressed: () async{
+              EasyLoading.show(status: "Updating Password");
+              var result = await AuthRepo().changePasswordRepo(
+                  currentPasswordController.text,
+                  newPasswordController.text,
+                  confirmPasswordController.text);
+
+              if(result){
+                EasyLoading.showSuccess("Password Update Successful");
+                BottomNav().launch(context);
+              }else{
+                EasyLoading.showError("Failed");
+              }
+
+
 
             }, child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

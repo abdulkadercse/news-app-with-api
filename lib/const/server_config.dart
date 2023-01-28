@@ -6,4 +6,14 @@ class ServerConfig{
 
   static const String latestNewsUrl = 'latest_news';
   static const String newsDetailsUrl = 'news_details';
+  static const String changePassword = 'change_password';
+  static const String updateProfile = 'update_profile';
+  static const String search = 'search_news';
+
+  static const String newsCategories='news_categories';
+  static const String categorfirst='category_news';
+
+  static const String logOut = 'user_logout';
+
+
 }

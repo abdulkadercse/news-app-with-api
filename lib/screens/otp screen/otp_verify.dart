@@ -33,10 +33,7 @@ class _OtpVerifyState extends State<OtpVerify> {
                   height: 68,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-
-                    onSaved: (value1){
-
-                    },
+                    onSaved: (value1) {},
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "0",
@@ -58,9 +55,7 @@ class _OtpVerifyState extends State<OtpVerify> {
                   height: 68,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    onSaved: (value1){
-
-                    },
+                    onSaved: (value1) {},
                     decoration: const InputDecoration(
                       hintText: "0",
                       border: OutlineInputBorder(),
@@ -82,9 +77,7 @@ class _OtpVerifyState extends State<OtpVerify> {
                   height: 68,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    onSaved: (value1){
-
-                    },
+                    onSaved: (value1) {},
                     decoration: const InputDecoration(
                       hintText: "0",
                       border: OutlineInputBorder(),
@@ -127,24 +120,31 @@ class _OtpVerifyState extends State<OtpVerify> {
                 ),
               ],
             ),
-            const SizedBox(height: 10.0,),
-            ElevatedButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NewPassword()),
-              );
-            }, child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Text("Verify",style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),),
-                ),
-              ],
-            )),
-
-
+            const SizedBox(
+              height: 10.0,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NewPassword()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        "Verify",
+                        style: TextStyle(
+                            fontSize: 18.0, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
